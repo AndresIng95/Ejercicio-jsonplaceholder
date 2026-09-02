@@ -32,7 +32,9 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
             <Typography variant="body2" color="text.secondary">
               @{user.username}
             </Typography>
-            <Typography variant="body2">{user.email}</Typography>
+            <Typography variant="body2" color="primary">
+                {user.email}
+            </Typography>
           </Stack>
 
           <Stack direction="row">
