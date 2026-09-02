@@ -1,3 +1,4 @@
+/*
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import Avatar from '@mui/material/Avatar'
@@ -52,6 +53,88 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
               <DeleteIcon />
             </IconButton>
           </Stack>
+        </Stack>
+      </CardContent>
+    </Card>
+  )
+}
+*/
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import Avatar from '@mui/material/Avatar'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import IconButton from '@mui/material/IconButton'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import type { User } from '../services/userService'
+
+function initials(name: string) {
+  return name
+    .split(' ')
+    .slice(0, 2)
+    .map((p) => p[0])
+    .join('')
+    .toUpperCase()
+}
+
+type UserCardProps = {
+  user: User
+  onEdit: (user: User) => void
+  onDelete: (user: User) => void
+}
+
+export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
+  return (
+    <Card sx={{ height: '100%' }}>
+      <CardContent>
+        <Stack spacing={2} alignItems="center">
+          
+          {/* Avatar above the user information */}
+          <Avatar
+            sx={{
+              bgcolor: 'primary.main',
+              width: 64,
+              height: 64,
+              fontSize: '1.4rem',
+            }}
+          >
+            {initials(user.name)}
+          </Avatar>
+
+          {/* User information */}
+          <Stack spacing={0.5} alignItems="center">
+            <Typography variant="h6">
+              {user.name}
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary">
+              @{user.username}
+            </Typography>
+
+            <Typography variant="body2" color="primary">
+              {user.email}
+            </Typography>
+          </Stack>
+
+          {/* Buttons */}
+          <Stack direction="row" spacing={1}>
+            <IconButton
+              aria-label={`Editar ${user.name}`}
+              onClick={() => onEdit(user)}
+            >
+              <EditIcon />
+            </IconButton>
+
+            <IconButton
+              aria-label={`Eliminar ${user.name}`}
+              color="error"
+              onClick={() => onDelete(user)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>
+
         </Stack>
       </CardContent>
     </Card>
